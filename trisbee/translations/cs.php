@@ -27,7 +27,7 @@ $_MODULE['<{trisbee}prestashop>confirmation_2cfa9dfaf4e6803174e8445d582bc080'] =
 $_MODULE['<{trisbee}prestashop>confirmation_0db71da7150c27142eef9d22b843b4a9'] = 'V případě otázek nebo potřeby dalších informací kontaktujte prosím naši';
 $_MODULE['<{trisbee}prestashop>confirmation_64430ad2835be8ad60c59e7d44e4b0b1'] = 'zákaznickou podporu';
 $_MODULE['<{trisbee}prestashop>payment_387b3bb1b1c89a2e70e963e20f42a88f'] = 'Zaplatím přes Trisbee';
-$_MODULE['<{trisbee}prestashop>payment_f79dda468c363b302b569bdb3c1e1bbb'] = '(bezpečná platba kartou v mobilní aplikaci)';
+$_MODULE['<{trisbee}prestashop>payment_f79dda468c363b302b569bdb3c1e1bbb'] = '(rychlá platba kartou v mobilní aplikaci)';
 
 
 return $_MODULE;
