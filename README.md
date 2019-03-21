@@ -10,7 +10,7 @@ Testováno na verzi Prestashop: `1.6.1.17` s tématem `default-boostrap`.
 2. v administraci eshopu kliněte v menu na: `Moduly a Služby` -> `Přidat nový modul` -> `Vybrat soubor` -> `Nahrát tento modul`.
 3. modul je připraven
 
-# Preview
+# Náhled
 
 ![Screenshot admin](./doc/screenshot_admin.png)
 
