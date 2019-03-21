@@ -1,28 +1,3 @@
-{*
-* 2007-2016 PrestaShop
-*
-* NOTICE OF LICENSE
-*
-* This source file is subject to the Academic Free License (AFL 3.0)
-* that is bundled with this package in the file LICENSE.txt.
-* It is also available through the world-wide-web at this URL:
-* http://opensource.org/licenses/afl-3.0.php
-* If you did not receive a copy of the license and are unable to
-* obtain it through the world-wide-web, please send an email
-* to license@prestashop.com so we can send you a copy immediately.
-*
-* DISCLAIMER
-*
-* Do not edit or add to this file if you wish to upgrade PrestaShop to newer
-* versions in the future. If you wish to customize PrestaShop for your
-* needs please refer to http://www.prestashop.com for more information.
-*
-*  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2016 PrestaShop SA
-*  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
-*  International Registered Trademark & Property of PrestaShop SA
-*}
-
 {capture name=path}
 	<a href="{$link->getPageLink('order', true, NULL, "step=3")|escape:'html':'UTF-8'}" rel="nofollow" title="{l s='Go back to the Checkout' mod='trisbee'}">{l s='Checkout' mod='trisbee'}</a><span class="navigation-pipe">{$navigationPipe}</span>{l s='Trisbee payment' mod='trisbee'}
 {/capture}
@@ -39,7 +14,7 @@
 <form action="{$link->getModuleLink('trisbee', 'validation', [], true)|escape:'html'}" method="post">
 	<input type="hidden" name="confirm" value="1" />
 	<p>
-		<img src="{$this_path_trisbee}trisbee.jpg" alt="{l s='Trisbee payment' mod='trisbee'}" style="float:left; margin: 0px 10px 5px 0px;" />
+		<img src="{$this_path_trisbee}images/logo.png" alt="{l s='Trisbee payment' mod='trisbee'}" style="float:left; margin: 0px 10px 5px 0px;" />
 		{l s='You have chosen the Trisbee method.' mod='trisbee'}
 		<br/><br />
 		{l s='The total amount of your order is' mod='trisbee'}

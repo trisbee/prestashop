@@ -12,7 +12,7 @@ class Trisbee extends PaymentModule
 		$this->name = 'trisbee';
 		$this->tab = 'payments_gateways';
 		$this->version = '1.0.0';
-		$this->author = 'Trisbee';
+		$this->author = 'Trisbee s.r.o.';
 		$this->need_instance = 1;
 		$this->controllers = array('validation');
 		$this->is_eu_compatible = 1;
@@ -22,7 +22,7 @@ class Trisbee extends PaymentModule
 		parent::__construct();
 
 		$this->displayName = $this->l('Trisbee');
-		$this->description = $this->l('Accept Trisbee payments');
+		$this->description = $this->l('Accept card payments via mobile app');
 
 		/* For 1.4.3 and less compatibility */
 		$updateConfig = array('PS_OS_CHEQUE', 'PS_OS_PAYMENT', 'PS_OS_PREPARATION', 'PS_OS_SHIPPING', 'PS_OS_CANCELED', 'PS_OS_REFUND', 'PS_OS_ERROR', 'PS_OS_OUTOFSTOCK', 'PS_OS_BANKWIRE', 'PS_OS_PAYPAL', 'PS_OS_WS_PAYMENT');
@@ -81,7 +81,7 @@ class Trisbee extends PaymentModule
 
 		return array(
 			'cta_text' => $this->l('Pay with Trisbee'),
-			'logo' => Media::getMediaPath(dirname(__FILE__).'/trisbee.jpg'),
+			'logo' => Media::getMediaPath(dirname(__FILE__).'/images/logo.png'),
 			'action' => $this->context->link->getModuleLink($this->name, 'validation', array('confirm' => true), true)
 		);
 	}

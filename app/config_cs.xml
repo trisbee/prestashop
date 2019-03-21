@@ -3,8 +3,8 @@
 	<name>trisbee</name>
 	<displayName><![CDATA[Trisbee]]></displayName>
 	<version><![CDATA[1.0.0]]></version>
-	<description><![CDATA[Accept Trisbee payments]]></description>
-	<author><![CDATA[Trisbee]]></author>
+	<description><![CDATA[Platby kartou přes mobilní aplikaci]]></description>
+	<author><![CDATA[Trisbee s.r.o.]]></author>
 	<tab><![CDATA[payments_gateways]]></tab>
 	<is_configurable>0</is_configurable>
 	<need_instance>1</need_instance>
