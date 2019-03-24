@@ -14,7 +14,7 @@
 <form action="{$link->getModuleLink('trisbee', 'validation', [], true)|escape:'html'}" method="post">
 	<input type="hidden" name="confirm" value="1" />
 	<p>
-		<img src="{$this_path_trisbee}images/logo.png" alt="{l s='Trisbee payment' mod='trisbee'}" style="float:left; margin: 0px 10px 5px 0px;" />
+		<img src="{$this_path_trisbee}views/img/logo.png" alt="{l s='Trisbee payment' mod='trisbee'}" style="float:left; margin: 0px 10px 5px 0px;" />
 		{l s='You have chosen the Trisbee method.' mod='trisbee'}
 		<br/><br />
 		{l s='The total amount of your order is' mod='trisbee'}

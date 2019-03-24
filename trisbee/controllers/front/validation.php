@@ -1,56 +1,84 @@
 <?php
-
 /**
- * @since 1.5.0
+ * 2007-2019 PrestaShop
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@prestashop.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
+ * versions in the future. If you wish to customize PrestaShop for your
+ * needs please refer to http://www.prestashop.com for more information.
+ *
+ *  @author    PrestaShop SA <contact@prestashop.com>
+ *  @copyright 2007-2019 PrestaShop SA
+ *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ *  International Registered Trademark & Property of PrestaShop SA
  */
 class TrisbeeValidationModuleFrontController extends ModuleFrontController
 {
-	public $ssl = true;
-	public $display_column_left = false;
+    /**
+     * This class should be use by your Instant Payment
+     * Notification system to validate the order remotely
+     */
+    public function postProcess()
+    {
+        /*
+         * If the module is not active anymore, no need to process anything.
+         */
+        if ($this->module->active == false) {
+            die;
+        }
 
-	public function postProcess()
-	{
-		if ($this->context->cart->id_customer == 0 || $this->context->cart->id_address_delivery == 0 || $this->context->cart->id_address_invoice == 0 || !$this->module->active)
-			Tools::redirectLink(__PS_BASE_URI__.'order.php?step=1');
+        /**
+         * Since it is an example, we choose sample data,
+         * You'll have to get the correct values :)
+         */
+        $cart_id = 1;
+        $customer_id = 1;
+        $amount = 100.00;
 
-		// Check that this payment option is still available in case the customer changed his address just before the end of the checkout process
-		$authorized = false;
-		foreach (Module::getPaymentModules() as $module)
-			if ($module['name'] == 'trisbee')
-			{
-				$authorized = true;
-				break;
-			}
-		if (!$authorized)
-			die(Tools::displayError('This payment method is not available.'));
+        /*
+         * Restore the context from the $cart_id & the $customer_id to process the validation properly.
+         */
+        Context::getContext()->cart = new Cart((int) $cart_id);
+        Context::getContext()->customer = new Customer((int) $customer_id);
+        Context::getContext()->currency = new Currency((int) Context::getContext()->cart->id_currency);
+        Context::getContext()->language = new Language((int) Context::getContext()->customer->id_lang);
 
-		$customer = new Customer($this->context->cart->id_customer);
-		if (!Validate::isLoadedObject($customer))
-			Tools::redirectLink(__PS_BASE_URI__.'order.php?step=1');
+        $secure_key = Context::getContext()->customer->secure_key;
 
-		if (Tools::getValue('confirm'))
-		{
-			$customer = new Customer((int)$this->context->cart->id_customer);
-			$total = $this->context->cart->getOrderTotal(true, Cart::BOTH);
-			$this->module->validateOrder((int)$this->context->cart->id, Configuration::get('PS_OS_PREPARATION'), $total, $this->module->displayName, null, array(), null, false, $customer->secure_key);
-			Tools::redirectLink(__PS_BASE_URI__.'order-confirmation.php?key='.$customer->secure_key.'&id_cart='.(int)$this->context->cart->id.'&id_module='.(int)$this->module->id.'&id_order='.(int)$this->module->currentOrder);
-		}
-	}
+        if ($this->isValidOrder() === true) {
+            $payment_status = Configuration::get('PS_OS_PAYMENT');
+            $message = null;
+        } else {
+            $payment_status = Configuration::get('PS_OS_ERROR');
 
-	/**
-	 * @see FrontController::initContent()
-	 */
-	public function initContent()
-	{
-		parent::initContent();
+            /**
+             * Add a message to explain why the order has not been validated
+             */
+            $message = $this->module->l('An error occurred while processing payment');
+        }
 
-		$this->context->smarty->assign(array(
-			'total' => $this->context->cart->getOrderTotal(true, Cart::BOTH),
-			'this_path' => $this->module->getPathUri(),//keep for retro compat
-			'this_path_trisbee' => $this->module->getPathUri(),
-			'this_path_ssl' => Tools::getShopDomainSsl(true, true).__PS_BASE_URI__.'modules/'.$this->module->name.'/'
-		));
+        $module_name = $this->module->displayName;
+        $currency_id = (int) Context::getContext()->currency->id;
 
-		$this->setTemplate('validation.tpl');
-	}
+        return $this->module->validateOrder($cart_id, $payment_status, $amount, $module_name, $message, array(), $currency_id, false, $secure_key);
+    }
+
+    protected function isValidOrder()
+    {
+        /*
+         * Add your checks right there
+         */
+        return true;
+    }
 }

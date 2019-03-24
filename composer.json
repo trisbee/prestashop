@@ -1,0 +1,33 @@
+{
+    "name": "trisbee/prestashop",
+    "description": "💳 Trisbee payment module for Prestashop",
+    "type": "module",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Michal Landsman",
+            "email": "michal.landsman@trisbee.com"
+        },
+        {
+            "name": "Miloš Kratochvíl",
+            "email": "milos@mergo.cz"
+        }
+    ],
+    "scripts": {
+        "cs-fix": "@php ./vendor/bin/php-cs-fixer fix"
+    },
+    "require": {
+        "php": ">=5.6",
+        "composer/composer": "^1.0.2"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.14",
+        "symfony/process": "^3.4"
+    },
+    "config": {
+        "sort-packages": true,
+        "platform": {
+            "php": "5.6"
+        }
+    }
+}
